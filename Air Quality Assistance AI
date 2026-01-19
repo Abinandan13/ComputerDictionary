@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Air Quality Assistant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            width: 350px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c7a7b;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background: #2c7a7b;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #225e61;
+        }
+
+        .output {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f1f5f9;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🌍 Air Quality Assistant</h2>
+
+    <input type="text" id="city" placeholder="Enter City Name">
+    <input type="number" id="aqi" placeholder="Enter AQI Value">
+
+    <button onclick="analyzeAQI()">Analyze Air Quality</button>
+
+    <div class="output" id="result"></div>
+</div>
+
+<script>
+    function analyzeAQI() {
+        let city = document.getElementById("city").value;
+        let aqi = parseInt(document.getElementById("aqi").value);
+        let message = "";
+        let advice = "";
+
+        if (aqi <= 50) {
+            message = "Good 😊";
+            advice = "Air quality is satisfactory. Enjoy outdoor activities.";
+        } else if (aqi <= 100) {
+            message = "Moderate 🙂";
+            advice = "Sensitive individuals should limit prolonged outdoor activity.";
+        } else if (aqi <= 150) {
+            message = "Unhealthy for Sensitive Groups ⚠️";
+            advice = "Reduce outdoor exposure, especially for children and elderly.";
+        } else if (aqi <= 200) {
+            message = "Unhealthy 😷";
+            advice = "Avoid prolonged outdoor activities. Wear a mask if needed.";
+        } else if (aqi <= 300) {
+            message = "Very Unhealthy 🚨";
+            advice = "Health alert. Stay indoors as much as possible.";
+        } else {
+            message = "Hazardous ☠️";
+            advice = "Serious health risk. Stay indoors and use air purifiers.";
+        }
+
+        document.getElementById("result").innerHTML = `
+            <strong>City:</strong> ${city}<br>
+            <strong>AQI:</strong> ${aqi}<br>
+            <strong>Status:</strong> ${message}<br>
+            <strong>Health Advice:</strong> ${advice}
+        `;
+    }
+</script>
+
+</body>
+</html>
